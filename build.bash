@@ -1,16 +1,10 @@
-#!/bin/bash
-
 set -e
-
 cd "$(dirname "$0")"
-
-# Function to recursively build the tree, grouping directories first
 function build_tree() {
     local dir="$1"
     local indent="$2"
     local first=1
     echo -n "${indent}{\"name\":\"$(basename "$dir")\",\"type\":\"directory\",\"children\":["
-    # First, process directories
     for entry in "$dir"/*; do
         if [[ -d "$entry" ]]; then
             [[ $first -eq 0 ]] && echo -n ","
@@ -18,7 +12,6 @@ function build_tree() {
             first=0
         fi
     done
-    # Then, process HTML files
     for entry in "$dir"/*; do
         if [[ -f "$entry" && "${entry##*.}" == "html" ]]; then
             [[ $first -eq 0 ]] && echo -n ","
@@ -28,7 +21,6 @@ function build_tree() {
     done
     echo -n "]}"
 }
-
 echo "[" > html_tree.json
 first=1
 for entry in *; do
@@ -46,5 +38,3 @@ for entry in *; do
     fi
 done
 echo "]" >> html_tree.json
-
-echo "html_tree.json generated."
