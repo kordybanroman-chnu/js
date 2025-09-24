@@ -1,0 +1,5 @@
+[
+{"name":"lab-1","type":"directory","children":[  {"name":"01-JS01.html","type":"file","path":"lab-1/01-JS01.html"},  {"name":"01-JS02.html","type":"file","path":"lab-1/01-JS02.html"}]},
+{"name":"lab-2","type":"directory","children":[  {"name":"images","type":"directory","children":[]},  {"name":"scripts","type":"directory","children":[]},  {"name":"styles","type":"directory","children":[]},  {"name":"02-JS01.html","type":"file","path":"lab-2/02-JS01.html"},  {"name":"light-bulb.html","type":"file","path":"lab-2/light-bulb.html"},  {"name":"output-demo.html","type":"file","path":"lab-2/output-demo.html"},  {"name":"traffic-light.html","type":"file","path":"lab-2/traffic-light.html"}]},
+{"name":"index.html","type":"file","path":"index.html"}
+]

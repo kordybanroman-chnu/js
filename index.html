@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HTML File Tree</title>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+
+    .directory {
+      font-weight: bold;
+    }
+
+    .file {
+      margin-left: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>HTML File Tree</h1>
+  <div id="tree"></div>
+  <script>
+    function createTree(nodes) {
+      const ul = document.createElement('ul');
+      nodes.forEach(node => {
+        const li = document.createElement('li');
+        if (node.type === 'directory') {
+          li.textContent = node.name;
+          li.className = 'directory';
+          if (node.children && node.children.length) {
+            li.appendChild(createTree(node.children));
+          }
+        } else if (node.type === 'file') {
+          const a = document.createElement('a');
+          a.textContent = node.name;
+          a.href = node.path;
+          a.className = 'file';
+          li.appendChild(a);
+        }
+        ul.appendChild(li);
+      });
+      return ul;
+    }
+
+    fetch('html_tree.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('tree').appendChild(createTree(data));
+      })
+      .catch(err => {
+        document.getElementById('tree').textContent = 'Failed to load html_tree.json';
+      });
+  </script>
+</body>
+
+</html>
