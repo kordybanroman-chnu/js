@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light Bulb Toggle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #bulb {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 20px auto;
+      border: 5px solid #333;
+      transition: background-color 0.3s;
+    }
+
+    .on {
+      background-color: yellow;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Light Bulb Toggle Simulation</h1>
+  <p>Click the buttons to turn the light bulb on or off.</p>
+
+  <div id="bulb" class="off"></div>
+
+  <button onclick="turnOn()">Включити</button>
+  <button onclick="turnOff()">Вимкнути</button>
+
+  <script>
+    function turnOn() {
+      var bulb = document.getElementById('bulb');
+      bulb.classList.remove('off');
+      bulb.classList.add('on');
+    }
+
+    function turnOff() {
+      var bulb = document.getElementById('bulb');
+      bulb.classList.remove('on');
+      bulb.classList.add('off');
+    }
+  </script>
+</body>
+
+</html>

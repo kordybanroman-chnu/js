@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Output Methods Demo</title>
+</head>
+
+<body>
+  <h1>Demonstration of JavaScript Output Methods</h1>
+
+  <h2>1. Using innerHTML</h2>
+  <div id="innerDemo">Original text for innerHTML demonstration.</div>
+
+  <h2>2. Using document.write()</h2>
+  <p>This will be overwritten or inserted by document.write.</p>
+
+  <h2>3. Using window.alert()</h2>
+  <p>An alert popup will appear.</p>
+
+  <h2>4. Using console.log()</h2>
+  <p>Check the browser console (F12) for the log output.</p>
+
+  <script>
+    var innerElem = document.getElementById('innerDemo');
+    var sum = 0.1 + 0.2;
+    innerElem.innerHTML = "In JavaScript, 0.1 + 0.2 = " + sum;
+    innerElem.style.color = '#2d264a';
+
+    document.write("<p>document.write(9 + 10) outputs: 19</p>");
+
+    window.alert("Важлива інформація!");
+
+    console.log(20 + 17);
+  </script>
+
+  <p>End of document.</p>
+</body>
+
+</html>
