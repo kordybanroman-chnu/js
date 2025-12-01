@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 09-JS02</title>
+</head>
+
+<body>
+  <h1>П Р І В Е Т С Т В А</h1>
+  <script>
+    var imja = localStorage.getItem('name');
+    var age = parseInt(localStorage.getItem('age'));
+    var x = "Привіт! " + imja + ". ";
+    if (age > 50) {
+      document.write(x + "Ви включені в старшу групу.");
+    } else if (age > 30) {
+      document.write(x + "Ви включених групу середнього віку.");
+    } else {
+      document.write(x + "Ваше ставлення до молодіжної групи.");
+    }
+  </script>
+  <p>
+    <a href="09-JS01.html">Повернення</a>
+  </p>
+</body>
+
+</html>

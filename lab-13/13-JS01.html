@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 13-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    p {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    button {
+      margin: 5px;
+    }
+
+    a {
+      color: blue;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 13: Робота з DOM елементами</h1>
+
+  <div class="section">
+    <h2>1. Методи об'єкта window</h2>
+    <button onclick="openWindow()">Відкрити вікно</button>
+    <button onclick="resizeWindow()">Змінити розмір</button>
+    <button onclick="moveWindow()">Перемістити</button>
+    <button onclick="closeWindow()">Закрити вікно</button>
+    <script>
+      var newWin;
+      function openWindow() {
+        newWin = window.open("", "newWin", "width=300,height=300");
+        newWin.document.write("<h1>Нове вікно</h1>");
+      }
+      function resizeWindow() {
+        if (newWin) newWin.resizeTo(500, 500);
+      }
+      function moveWindow() {
+        if (newWin) newWin.moveTo(200, 200);
+      }
+      function closeWindow() {
+        if (newWin) newWin.close();
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Зміна стилю p</h2>
+    <p id="text">I learning JavaScript events!</p>
+    <button onclick="changeCSS()">Change style!</button>
+    <script>
+      function changeCSS() {
+        var p = document.getElementById("text");
+        p.style.color = "orange";
+        p.style.fontSize = "20px";
+        p.style.fontFamily = "Comic Sans MS";
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>3. Кнопки для кольорів</h2>
+    <button onclick="setBlue()">Синій</button>
+    <button onclick="setPink()">Рожевий</button>
+    <button onclick="setBrown()">Коричневий</button>
+    <button onclick="setWhite()">Білий</button>
+    <script>
+      function setBlue() { document.body.style.backgroundColor = "blue"; }
+      function setPink() { document.body.style.backgroundColor = "pink"; }
+      function setBrown() { document.body.style.backgroundColor = "brown"; }
+      function setWhite() { document.body.style.backgroundColor = "white"; }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>4. Посилання з hover</h2>
+    <a href="#" id="link">Посилання</a>
+    <script>
+      var link = document.getElementById("link");
+      link.onmouseover = function () { document.body.style.backgroundColor = "yellow"; };
+      link.onmouseout = function () { document.body.style.backgroundColor = "white"; };
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>5. Випадаючі списки</h2>
+    <select name="country" id="country" onchange="changeCities()">
+      <option value="ger">Germany</option>
+      <option value="usa">USA</option>
+      <option value="ukr">Ukraine</option>
+    </select>
+    <select name="cities" id="cities"></select>
+    <p id="selected"></p>
+    <script>
+      var cities = {
+        ger: ["Berlin", "Munich"],
+        usa: ["New York", "Los Angeles"],
+        ukr: ["Kyiv", "Lviv"]
+      };
+      function changeCities() {
+        var country = document.getElementById("country").value;
+        var citySelect = document.getElementById("cities");
+        citySelect.innerHTML = "";
+        cities[country].forEach(function (city) {
+          var option = document.createElement("option");
+          option.value = city;
+          option.text = city;
+          citySelect.appendChild(option);
+        });
+        updateSelected();
+      }
+      document.getElementById("cities").onchange = updateSelected;
+      function updateSelected() {
+        var country = document.getElementById("country").options[document.getElementById("country").selectedIndex].text;
+        var city = document.getElementById("cities").value;
+        document.getElementById("selected").textContent = "Країна: " + country + ", Місто: " + city;
+      }
+      changeCities();
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>6. Деструктурування</h2>
+    <div id="destructuring"></div>
+    <script>
+      let arr = ["Tom", "Sam", "Ray", "Bob"];
+      let [x, y, z] = arr;
+      let data = {
+        names: ["Sam", "Tom", "Ray", "Bob"],
+        ages: [20, 24, 22, 26],
+      };
+      let { names: [, name2], ages: [, age2, , age4] } = data;
+      document.getElementById("destructuring").innerHTML =
+        "x: " + x + ", y: " + y + ", z: " + JSON.stringify(z) + "<br>" +
+        "name2: " + name2 + ", age2: " + age2 + ", age4: " + age4;
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>7. Функція mul</h2>
+    <div id="mulResult"></div>
+    <script>
+      function mul(...args) {
+        var numbers = args.filter(arg => typeof arg === 'number');
+        return numbers.length === 0 ? 0 : numbers.reduce((a, b) => a * b, 1);
+      }
+      document.getElementById("mulResult").innerHTML =
+        "mul(1, 'str', 2, 3, true): " + mul(1, "str", 2, 3, true) + "<br>" +
+        "mul(null, 'str', false, true): " + mul(null, "str", false, true);
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>8. Стрілкові функції</h2>
+    <div id="arrowResult"></div>
+    <script>
+      let server = {
+        data: 0,
+        convertToString: function (callback) {
+          callback(() => this.data + "");
+        }
+      };
+      let client = {
+        server: server,
+        result: "",
+        calc: function (data) {
+          this.server.data = data;
+          this.server.convertToString((cb) => this.result = cb());
+        }
+      };
+      client.calc(123);
+      document.getElementById("arrowResult").innerHTML =
+        "client.result: " + client.result + ", typeof: " + typeof client.result;
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>9. mapBuilder</h2>
+    <div id="mapResult"></div>
+    <script>
+      function mapBuilder(keysArray, valuesArrays) {
+        let map = new Map();
+        keysArray.forEach((key, i) => map.set(key, valuesArrays[i]));
+        return map;
+      }
+      let keys = [1, 2, 3, 4];
+      let values = ["div", "span", "b", "i"];
+      let map = mapBuilder(keys, values);
+      document.getElementById("mapResult").innerHTML =
+        "map.size: " + map.size + "<br>" +
+        "map.get(2): " + map.get(2);
+    </script>
+  </div>
+</body>
+
+</html>

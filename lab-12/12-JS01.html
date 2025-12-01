@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 12-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 12: Вікна і таблиці</h1>
+
+  <div>
+    <h2>1. Тригонометрична таблиця</h2>
+    <form id="trigForm">
+      Початок (градуси): <input type="number" id="start" value="0"><br>
+      Кінець (градуси): <input type="number" id="end" value="90"><br>
+      Крок: <input type="number" id="step" value="10"><br>
+      Функція: <select id="func">
+        <option value="sin">sin</option>
+        <option value="cos">cos</option>
+        <option value="tan">tan</option>
+      </select><br>
+      <button type="button" onclick="openTrigWindow()">Відкрити таблицю</button>
+    </form>
+    <script>
+      function openTrigWindow() {
+        var start = parseInt(document.getElementById("start").value);
+        var end = parseInt(document.getElementById("end").value);
+        var step = parseInt(document.getElementById("step").value);
+        var func = document.getElementById("func").value;
+
+        var content = "<h1>Тригонометрична таблиця</h1><table><tr><th>Кут</th><th>" + func + "</th></tr>";
+        for (var angle = start; angle <= end; angle += step) {
+          var rad = angle * Math.PI / 180;
+          var value;
+          switch (func) {
+            case "sin": value = Math.sin(rad); break;
+            case "cos": value = Math.cos(rad); break;
+            case "tan": value = Math.tan(rad); break;
+          }
+          content += "<tr><td>" + angle + "</td><td>" + value.toFixed(4) + "</td></tr>";
+        }
+        content += "</table>";
+
+        var win = window.open("", "trigWindow", "width=600,height=400");
+        win.document.write(content);
+      }
+    </script>
+  </div>
+
+  <div>
+    <h2>2. Облік товарів</h2>
+    <table id="inventory">
+      <tr>
+        <th>Товар</th>
+        <th>Кількість</th>
+        <th>Ціна</th>
+        <th>Сума</th>
+      </tr>
+      <tr>
+        <td>Яблука</td>
+        <td><input type="number" value="10" onchange="updateRow(this)"></td>
+        <td><input type="number" value="5" onchange="updateRow(this)"></td>
+        <td id="sum1">50</td>
+      </tr>
+      <tr>
+        <td>Банани</td>
+        <td><input type="number" value="5" onchange="updateRow(this)"></td>
+        <td><input type="number" value="8" onchange="updateRow(this)"></td>
+        <td id="sum2">40</td>
+      </tr>
+      <tr>
+        <td>Апельсини</td>
+        <td><input type="number" value="8" onchange="updateRow(this)"></td>
+        <td><input type="number" value="6" onchange="updateRow(this)"></td>
+        <td id="sum3">48</td>
+      </tr>
+      <tr>
+        <th colspan="3">Загальна сума</th>
+        <td id="total">138</td>
+      </tr>
+    </table>
+    <script>
+      function updateRow(input) {
+        var row = input.parentElement.parentElement;
+        var qty = parseFloat(row.cells[1].querySelector("input").value) || 0;
+        var price = parseFloat(row.cells[2].querySelector("input").value) || 0;
+        var sum = qty * price;
+        row.cells[3].textContent = sum;
+        updateTotal();
+      }
+
+      function updateTotal() {
+        var total = 0;
+        for (var i = 1; i <= 3; i++) {
+          total += parseFloat(document.getElementById("sum" + i).textContent) || 0;
+        }
+        document.getElementById("total").textContent = total;
+      }
+    </script>
+  </div>
+</body>
+
+</html>

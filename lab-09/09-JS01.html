@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 09-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .output {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 9: Робота з формами в JS</h1>
+
+  <div class="section">
+    <h2>1.1 Форма з валідацією</h2>
+    <form name="F1" onsubmit="return validateForm()">
+      Ім'я: <input type="text" name="name"><br>
+      Вік: <input type="text" name="age"><br>
+      <input type="submit" value="ВВЕДЕННЯ">
+    </form>
+    <script>
+      function validateForm() {
+        var im = document.F1.name.value;
+        var vozr = document.F1.age.value;
+        var st = "";
+        if (im == "") st = "ім'я\n";
+        if (vozr == "") st += "вік";
+        if (st == "") {
+          // Simulate sending to second page
+          localStorage.setItem('name', im);
+          localStorage.setItem('age', vozr);
+          window.location.href = '09-JS02.html';
+          return false;
+        } else {
+          alert("Введіть:\n" + st);
+          return false;
+        }
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>1.2 Тригонометричний калькулятор</h2>
+    <form name="trigForm">
+      Кут (градуси): <input type="text" name="angle" onchange="validateNumber(this)"><br>
+      Функція: <select name="func">
+        <option value="sin">sin</option>
+        <option value="cos">cos</option>
+        <option value="tan">tan</option>
+      </select><br>
+      <button type="button" onclick="calculateTrig()">Обчислити</button>
+    </form>
+    <div id="trigResult"></div>
+    <script>
+      function validateNumber(fld) {
+        var t = fld.value;
+        for (var i = 0; i < t.length; i++) {
+          var ch = t.charAt(i);
+          if ((ch < "0" || ch > "9") && ch != "," && ch != ".") {
+            alert("Не цифра");
+            fld.focus();
+            fld.select();
+            return;
+          }
+        }
+      }
+
+      function calculateTrig() {
+        var angle = parseFloat(document.trigForm.angle.value);
+        var func = document.trigForm.func.value;
+        var rad = angle * Math.PI / 180;
+        var result;
+        switch (func) {
+          case "sin": result = Math.sin(rad); break;
+          case "cos": result = Math.cos(rad); break;
+          case "tan": result = Math.tan(rad); break;
+        }
+        document.getElementById("trigResult").innerHTML = func + "(" + angle + "°) = " + result.toFixed(4);
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Вибір кольору</h2>
+    <select name="Gor" onchange="selectColor(this)">
+      <option value="red">Червоний</option>
+      <option value="yellow">Жовтий</option>
+      <option value="maroon">Каштановий</option>
+      <option value="green">Зелений</option>
+      <option value="blue">Синій</option>
+    </select>
+    <div id="colorOutput"></div>
+    <script>
+      function selectColor(list) {
+        var b = list.selectedIndex;
+        var c = list.options[b].text;
+        var d = list.options[b].value;
+        var output = "<font size='7' color='" + d + "'>" + c + "</font>";
+        document.getElementById("colorOutput").innerHTML = output;
+      }
+    </script>
+  </div>
+</body>
+
+</html>

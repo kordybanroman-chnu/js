@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 08-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      color: #333;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    p {
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    div {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 8: Обробка подій в JS</h1>
+
+  <h2 id="header">П'ять подій з мишкою</h2>
+  <p id="clickPara">Клацніть на мене мишкою</p>
+  <p id="holdPara">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</p>
+  <div id="moveDiv">Повільно проведіть курсором мишки по цій написи</div>
+
+  <script>
+    // Header: onclick - change font size, color, background
+    var headerFlag = true;
+    document.getElementById("header").onclick = function () {
+      if (headerFlag) {
+        this.style.fontSize = "48px";
+        this.style.color = "white";
+        this.style.backgroundColor = "blue";
+        headerFlag = false;
+      } else {
+        this.style.fontSize = "";
+        this.style.color = "";
+        this.style.backgroundColor = "";
+        headerFlag = true;
+      }
+    };
+
+    // Click para: onclick - change font, color, background
+    var clickFlag = true;
+    document.getElementById("clickPara").onclick = function () {
+      if (clickFlag) {
+        this.style.fontSize = "24px";
+        this.style.color = "white";
+        this.style.backgroundColor = "black";
+        clickFlag = false;
+      } else {
+        this.style.fontSize = "";
+        this.style.color = "";
+        this.style.backgroundColor = "";
+        clickFlag = true;
+      }
+    };
+
+    // Hold para: onmousedown green, onmouseup yellow
+    document.getElementById("holdPara").onmousedown = function () {
+      this.style.backgroundColor = "green";
+    };
+    document.getElementById("holdPara").onmouseup = function () {
+      this.style.backgroundColor = "yellow";
+    };
+
+    // Move div: onmouseover red, onmouseout blue
+    document.getElementById("moveDiv").onmouseover = function () {
+      this.style.backgroundColor = "red";
+    };
+    document.getElementById("moveDiv").onmouseout = function () {
+      this.style.backgroundColor = "blue";
+    };
+  </script>
+</body>
+
+</html>

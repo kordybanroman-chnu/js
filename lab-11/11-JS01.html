@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 11-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    #movingDiv {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    #container {
+      width: 500px;
+      height: 500px;
+      background-color: gray;
+      position: relative;
+      margin: 20px 0;
+    }
+
+    #dragDiv {
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+      position: absolute;
+      cursor: move;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 11: Рух і перетягування</h1>
+
+  <div class="section">
+    <h2>1. Рух по колу</h2>
+    <button onclick="startStop()">Старт/Стоп</button>
+    <div style="position: relative; width: 400px; height: 400px; border: 1px solid #000; margin: 20px;">
+      <div id="movingDiv"></div>
+    </div>
+    <script>
+      var intervalId;
+      var angle = 0;
+      var running = false;
+
+      function move() {
+        var div = document.getElementById("movingDiv");
+        var centerX = 175; // 200 - 25
+        var centerY = 175;
+        var radius = 150;
+        var x = centerX + radius * Math.cos(angle);
+        var y = centerY + radius * Math.sin(angle);
+        div.style.left = x + "px";
+        div.style.top = y + "px";
+        angle += 0.05;
+      }
+
+      function startStop() {
+        if (running) {
+          clearInterval(intervalId);
+          running = false;
+        } else {
+          intervalId = setInterval(move, 50);
+          running = true;
+        }
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Перетягування</h2>
+    <div id="container">
+      <div id="dragDiv"></div>
+    </div>
+    <script>
+      var dragDiv = document.getElementById("dragDiv");
+      var container = document.getElementById("container");
+      var isDragging = false;
+      var offsetX, offsetY;
+
+      dragDiv.onmousedown = function (e) {
+        isDragging = true;
+        offsetX = e.clientX - dragDiv.offsetLeft;
+        offsetY = e.clientY - dragDiv.offsetTop;
+        document.onmousemove = drag;
+        document.onmouseup = stopDrag;
+      };
+
+      function drag(e) {
+        if (isDragging) {
+          var x = e.clientX - offsetX;
+          var y = e.clientY - offsetY;
+          var maxX = container.clientWidth - dragDiv.clientWidth;
+          var maxY = container.clientHeight - dragDiv.clientHeight;
+          x = Math.max(0, Math.min(x, maxX));
+          y = Math.max(0, Math.min(y, maxY));
+          dragDiv.style.left = x + "px";
+          dragDiv.style.top = y + "px";
+        }
+      }
+
+      function stopDrag() {
+        isDragging = false;
+        document.onmousemove = null;
+        document.onmouseup = null;
+      }
+    </script>
+  </div>
+</body>
+
+</html>

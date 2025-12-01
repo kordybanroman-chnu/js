@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 06-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .output {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 6: Застосування масівів для створення меню та форм засобами JavaScript</h1>
+
+  <div class="section">
+    <h2>1. Виведення поточної дати і часу</h2>
+    <div id="dateTime"></div>
+    <script>
+      var now = new Date();
+      document.getElementById("dateTime").innerHTML =
+        "Time: " + now.getHours() + ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes() + "<br>" +
+        "Date: " + (now.getMonth() + 1) + "/" + now.getDate() + "/" + now.getFullYear();
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Годинник</h2>
+    <form name="clock">
+      Час: <input type="text" name="time" size="8" value=""><br>
+      Дата: <input type="text" name="date" size="8" value="">
+    </form>
+    <script>
+      var timeStr, dateStr;
+      function clock() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        timeStr = "" + hours;
+        timeStr += ((minutes < 10) ? ":0" : ":") + minutes;
+        timeStr += ((seconds < 10) ? ":0" : ":") + seconds;
+        document.clock.time.value = timeStr;
+
+        var date = now.getDate();
+        var month = now.getMonth() + 1;
+        var year = now.getFullYear();
+        dateStr = "" + month;
+        dateStr += ((date < 10) ? "/0" : "/") + date;
+        dateStr += "/" + year;
+        document.clock.date.value = dateStr;
+
+        setTimeout("clock()", 1000);
+      }
+      clock();
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>3. Масиви</h2>
+    <div id="arrayDemo"></div>
+    <script>
+      var myArray = new Array();
+      myArray[0] = "first element";
+      myArray[1] = "second element";
+      myArray[2] = "third element";
+      var output = "";
+      for (var i = 0; i < 3; i++) {
+        output += myArray[i] + "<br>";
+      }
+      document.getElementById("arrayDemo").innerHTML = output;
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>4. Math.random()</h2>
+    <div id="randomDemo"></div>
+    <button onclick="generateRandom()">Генерувати випадкове число</button>
+    <script>
+      function generateRandom() {
+        var randomNum = Math.random();
+        document.getElementById("randomDemo").innerHTML = "Випадкове число: " + randomNum;
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>Питання для самоконтролю</h2>
+    <p>1. Прикладами яких об'єктів служать об'єкти Date, Array, Math? - Заздалегідь заданих об'єктів.</p>
+    <p>2. Для чого призначений об'єкт Date? - Для роботи з датою і часом.</p>
+    <p>3. Що називають масивом? - Структура даних для зберігання множини елементів.</p>
+    <p>4. Для чого призначені масиви? - Для зберігання і обробки колекцій даних.</p>
+    <p>5. Яким чином здійснюється доступ до масиву? - За індексом, array[index].</p>
+    <p>6. Яким чином проводиться установка розміру масиву? - Динамічно, при присвоєнні елементів.</p>
+    <p>7. Для чого призначений об'єкт Math? - Для математичних обчислень.</p>
+    <p>8. Перерахуйте методи об'єкта Date: getHours, getMinutes, getDate, getMonth, getFullYear, etc.</p>
+    <p>9. Яким чином проводиться створення об'єктів Date, Array, Math? - new Date(), new Array(), Math.</p>
+    <p>10. Який об'єкт дозволяє працювати з часом? - Date.</p>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 15-JS01</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .output {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    h2 {
+      background-color: green;
+      color: white;
+    }
+
+    .inner {
+      font-size: 35px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 15: Використання бібліотеки jQuery</h1>
+
+  <div class="section">
+    <h2>1. Посилання з https</h2>
+    <a href="https://example.com">HTTPS link</a>
+    <a href="http://example.com">HTTP link</a>
+    <script>
+      $('a[href^="https://"]').attr('target', '_blank');
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. h2 з класом head</h2>
+    <h2 class="head">header1</h2>
+    <h2 class="head">header2 <span class="inner">inner elem1</span></h2>
+    <h2>header3</h2>
+    <h2 class="head">header4<span>inner elem2</span></h2>
+    <h2>header5</h2>
+    <script>
+      $('h2.head').css('background-color', 'green');
+      $('h2.head .inner').css('font-size', '35px');
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>3. div після h3</h2>
+    <h3>header1</h3>
+    <div>text1</div>
+    <h3>header2</h3>
+    <div>text2</div>
+    <script>
+      $('h3').each(function () {
+        $(this).next('div').insertBefore(this);
+      });
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>4. Чекбокси</h2>
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <script>
+      var checkedCount = 0;
+      $('input[type="checkbox"]').change(function () {
+        if ($(this).is(':checked')) {
+          checkedCount++;
+        } else {
+          checkedCount--;
+        }
+        if (checkedCount >= 3) {
+          $('input[type="checkbox"]').prop('disabled', true);
+        }
+      });
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>5. Деструктурування</h2>
+    <div id="destructOutput"></div>
+    <script>
+      let arr = ["Tom", "Sam", "Ray", "Bob"];
+      let [x, y, z] = arr;
+      let data = {
+        names: ["Sam", "Tom", "Ray", "Bob"],
+        ages: [20, 24, 22, 26],
+      };
+      let { names: [, name2], ages: [, age2, , age4] } = data;
+      $('#destructOutput').html(
+        'x: ' + x + ', y: ' + y + ', z: ' + JSON.stringify(z) + '<br>' +
+        'name2: ' + name2 + ', age2: ' + age2 + ', name4: Bob, age4: ' + age4
+      );
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>6. Деструктурування об'єкта</h2>
+    <div id="objDestructOutput"></div>
+    <script>
+      let data2 = {
+        names: ["Sam", "Tom", "Ray", "Bob"],
+        ages: [20, 24, 22, 26],
+      };
+      let { names: [, name22], ages: [, age22, , age44] } = data2;
+      $('#objDestructOutput').html(
+        'name2: ' + name22 + ', age2: ' + age22 + ', name4: Bob, age4: ' + age44
+      );
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>7. Функція mul</h2>
+    <div id="mulOutput"></div>
+    <script>
+      function mul() {
+        let numbers = Array.from(arguments).filter(arg => typeof arg === 'number');
+        return numbers.length === 0 ? 0 : numbers.reduce((a, b) => a * b, 1);
+      }
+      $('#mulOutput').html(
+        'mul(1, "str", 2, 3, true): ' + mul(1, "str", 2, 3, true) + '<br>' +
+        'mul(null, "str", false, true): ' + mul(null, "str", false, true)
+      );
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>8. Стрілкові функції</h2>
+    <div id="arrowOutput"></div>
+    <script>
+      let server = {
+        data: 0,
+        convertToString: function (callback) {
+          callback(() => this.data + "");
+        }
+      };
+      let client = {
+        server: server,
+        result: "",
+        calc: function (data) {
+          this.server.data = data;
+          this.server.convertToString((cb) => this.result = cb());
+        }
+      };
+      client.calc(123);
+      $('#arrowOutput').html(
+        'client.result: ' + client.result + ', typeof: ' + typeof client.result
+      );
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>9. mapBuilder</h2>
+    <div id="mapOutput"></div>
+    <script>
+      function mapBuilder(keysArray, valuesArrays) {
+        let map = new Map();
+        keysArray.forEach((key, i) => map.set(key, valuesArrays[i]));
+        return map;
+      }
+      let keys = [1, 2, 3, 4];
+      let values = ["div", "span", "b", "i"];
+      let map = mapBuilder(keys, values);
+      $('#mapOutput').html(
+        'map.size: ' + map.size + '<br>' +
+        'map.get(2): ' + map.get(2)
+      );
+    </script>
+  </div>
+</body>
+
+</html>

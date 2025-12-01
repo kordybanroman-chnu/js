@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 07-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      color: #333;
+      cursor: pointer;
+    }
+
+    p {
+      cursor: pointer;
+    }
+
+    div {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 7: Доступ до об'єктів і сценаріїв. Доступ до властивостей і методів об'єктів</h1>
+
+  <h2 id="header1">Доступ до властивостей і методів</h2>
+  <p id="para1">Колекція all</p>
+  <div id="div1">Метод getElementById()</div>
+
+  <script>
+    var flag1 = true;
+    var flag2 = true;
+    var flag3 = true;
+
+    document.getElementById("header1").onclick = function () {
+      if (flag1) {
+        this.style.color = "white";
+        this.style.backgroundColor = "blue";
+        flag1 = false;
+      } else {
+        this.style.color = "black";
+        this.style.backgroundColor = "yellow";
+        flag1 = true;
+      }
+    };
+
+    document.getElementById("para1").onclick = function () {
+      if (flag2) {
+        this.style.color = "white";
+        this.style.backgroundColor = "green";
+        flag2 = false;
+      } else {
+        this.style.color = "red";
+        this.style.backgroundColor = "white";
+        flag2 = true;
+      }
+    };
+
+    document.getElementById("div1").onclick = function () {
+      if (flag3) {
+        this.style.color = "white";
+        this.style.backgroundColor = "blue";
+        flag3 = false;
+      } else {
+        this.style.color = "black";
+        this.style.backgroundColor = "yellow";
+        flag3 = true;
+      }
+    };
+  </script>
+
+  <div style="margin-top: 50px;">
+    <h2>Приклад з PDF</h2>
+    <p align="right" id="alfa" onmouseover="document.all.alfa.align='center'" onmouseout="this.align='left'">
+      Події onMouseOver і onMouseOut
+    </p>
+  </div>
+</body>
+
+</html>

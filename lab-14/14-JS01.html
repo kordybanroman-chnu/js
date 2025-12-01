@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 14-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .output {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 14: Валідація даних у формах засобами JS</h1>
+
+  <div class="section">
+    <h2>1. Перевірка першої літери</h2>
+    <input type="text" id="upperInput" placeholder="Введіть рядок">
+    <button onclick="checkUpper()">Перевірити</button>
+    <div id="upperResult"></div>
+    <script>
+      function upperCase(str) {
+        return /^[A-Z]/.test(str) ? "String's starts with uppercase character" : "String's not starts with uppercase character";
+      }
+      function checkUpper() {
+        var str = document.getElementById("upperInput").value;
+        document.getElementById("upperResult").innerHTML = upperCase(str);
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Перевірка email</h2>
+    <input type="text" id="emailInput" placeholder="Введіть email">
+    <button onclick="checkEmailSimple()">Перевірити</button>
+    <div id="emailResult"></div>
+    <script>
+      function checkEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+      function checkEmailSimple() {
+        var email = document.getElementById("emailInput").value;
+        document.getElementById("emailResult").innerHTML = checkEmail(email);
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>3. Regex для dbBd</h2>
+    <input type="text" id="dbInput" placeholder="Введіть рядок">
+    <button onclick="checkDb()">Перевірити</button>
+    <div id="dbResult"></div>
+    <script>
+      function checkDb(str) {
+        var regex = /d(b+)d/gi;
+        var match = regex.exec(str);
+        return match ? [match[0], match[1], match[2]] : null;
+      }
+      function checkDb() {
+        var str = document.getElementById("dbInput").value;
+        var result = checkDb(str);
+        document.getElementById("dbResult").innerHTML = result ? JSON.stringify(result) : "Не знайдено";
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>4. Заміна підрядків</h2>
+    <input type="text" id="swapInput" placeholder="Введіть рядок">
+    <button onclick="swapSubstr()">Замінити</button>
+    <div id="swapResult"></div>
+    <script>
+      function swapSubstr(str) {
+        return str.replace(/(\w+)\s+(\w+)/, '$2, $1');
+      }
+      function swapSubstr() {
+        var str = document.getElementById("swapInput").value;
+        document.getElementById("swapResult").innerHTML = swapSubstr(str);
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>5. Валідація кредитної карти</h2>
+    <input type="text" id="cardInput" placeholder="Введіть номер карти">
+    <button onclick="checkCard()">Перевірити</button>
+    <div id="cardResult"></div>
+    <script>
+      function checkCard(card) {
+        return /^\d{4}-\d{4}-\d{4}-\d{4}$/.test(card);
+      }
+      function checkCard() {
+        var card = document.getElementById("cardInput").value;
+        document.getElementById("cardResult").innerHTML = checkCard(card) ? "Валідний" : "Невалідний";
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>6. Перевірка email з правилами</h2>
+    <input type="text" id="emailAdvInput" placeholder="Введіть email">
+    <button onclick="checkEmailAdv()">Перевірити</button>
+    <div id="emailAdvResult"></div>
+    <script>
+      function checkEmailAdv(email) {
+        var regex = /^[a-zA-Z0-9_]+[^-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!regex.test(email)) return "Email is not correct!";
+        if (/--/.test(email.split('@')[0])) return "Email is not correct!";
+        return "Email is correct!";
+      }
+      function checkEmailAdv() {
+        var email = document.getElementById("emailAdvInput").value;
+        document.getElementById("emailAdvResult").innerHTML = checkEmailAdv(email);
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>7. Перевірка логіна</h2>
+    <input type="text" id="loginInput" placeholder="Введіть логін">
+    <button onclick="checkLogin()">Перевірити</button>
+    <div id="loginResult"></div>
+    <script>
+      function checkLogin(login) {
+        if (!/^[a-zA-Z][a-zA-Z0-9]{1,9}$/.test(login)) return false;
+        var numbers = login.match(/\d+/g) || [];
+        console.log(numbers);
+        return true;
+      }
+      function checkLogin() {
+        var login = document.getElementById("loginInput").value;
+        var valid = checkLogin(login);
+        var numbers = login.match(/\d+/g) || [];
+        document.getElementById("loginResult").innerHTML = (valid ? "true " : "false ") + numbers.join(', ');
+      }
+    </script>
+  </div>
+</body>
+
+</html>

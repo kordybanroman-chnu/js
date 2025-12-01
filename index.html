@@ -3,56 +3,85 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>HTML File Tree</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Tree</title>
   <style>
-    ul {
-      list-style-type: none;
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      margin: 20px;
+      line-height: 1.4;
     }
+
+    .tree {
+      margin-left: 20px;
+    }
+
+    .item {}
 
     .directory {
-      font-weight: bold;
+      color: #569cd6;
     }
 
-    .file {
-      margin-left: 1em;
+    .file a {
+      color: #d4d4d4;
+      text-decoration: none;
+    }
+
+    .file a:hover {
+      text-decoration: underline;
+    }
+
+    .indent {
+      display: inline-block;
+      width: 20px;
     }
   </style>
 </head>
 
 <body>
-  <h1>HTML File Tree</h1>
+  <h1>JavaScript</h1>
   <div id="tree"></div>
+
   <script>
-    function createTree(nodes) {
-      const ul = document.createElement('ul');
-      nodes.forEach(node => {
-        const li = document.createElement('li');
-        if (node.type === 'directory') {
-          li.textContent = node.name;
-          li.className = 'directory';
-          if (node.children && node.children.length) {
-            li.appendChild(createTree(node.children));
-          }
-        } else if (node.type === 'file') {
-          const a = document.createElement('a');
-          a.textContent = node.name;
-          a.href = node.path;
-          a.className = 'file';
-          li.appendChild(a);
-        }
-        ul.appendChild(li);
-      });
-      return ul;
+    async function loadTree() {
+      try {
+        const response = await fetch('html_tree.json');
+        const treeData = await response.json();
+        const treeDiv = document.getElementById('tree');
+        buildTree(treeData, treeDiv, '', '');
+      } catch (error) {
+        console.error('Error loading tree:', error);
+        document.getElementById('tree').innerHTML = 'Error loading file tree.';
+      }
     }
 
-    fetch('html_tree.json')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('tree').appendChild(createTree(data));
-      })
-      .catch(err => {
-        document.getElementById('tree').textContent = 'Failed to load html_tree.json';
+    function buildTree(data, parent, prefix, path) {
+      const keys = Object.keys(data);
+      keys.forEach((key, index) => {
+        const isLast = index === keys.length - 1;
+        const connector = isLast ? '└──&nbsp;' : '├──&nbsp;';
+        const newPrefix = prefix + (isLast ? '&nbsp;&nbsp;&nbsp;&nbsp;' : '│&nbsp;&nbsp;&nbsp;');
+        const currentPath = path ? path + '/' + key : key;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+
+        if (data[key] === null) {
+          itemDiv.className += ' file';
+          itemDiv.innerHTML = prefix + connector + '<a href="' + currentPath + '">' + key + '</a>';
+        } else {
+          itemDiv.className += ' directory';
+          itemDiv.innerHTML = prefix + connector + key + '/';
+          buildTree(data[key], itemDiv, newPrefix, currentPath);
+        }
+
+        parent.appendChild(itemDiv);
       });
+    }
+
+    loadTree();
   </script>
 </body>
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 10-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    #photo {
+      width: 400px;
+      height: 300px;
+      border: 1px solid #ccc;
+    }
+
+    #canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Лабораторна робота 10: Робота з зображеннями</h1>
+
+  <div class="section">
+    <h2>1. Перегляд фотографій</h2>
+    <select onchange="changePhoto(this)">
+      <option value="">Виберіть фото</option>
+      <option value="les">Ліс</option>
+      <option value="city">Місто</option>
+      <option value="mountain">Гори</option>
+    </select>
+    <br>
+    <img id="photo" src="" alt="Фото">
+    <script>
+      var photos = [];
+      photos["les"] = new Image(400, 300);
+      photos["les"].src = "data:image/svg+xml;base64," + btoa('<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="green"/><text x="200" y="150" text-anchor="middle" fill="white">Ліс</text></svg>');
+      photos["city"] = new Image(400, 300);
+      photos["city"].src = "data:image/svg+xml;base64," + btoa('<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="gray"/><text x="200" y="150" text-anchor="middle" fill="white">Місто</text></svg>');
+      photos["mountain"] = new Image(400, 300);
+      photos["mountain"].src = "data:image/svg+xml;base64," + btoa('<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="blue"/><text x="200" y="150" text-anchor="middle" fill="white">Гори</text></svg>');
+
+      function changePhoto(select) {
+        var d = select.value;
+        if (d) {
+          document.getElementById("photo").src = photos[d].src;
+        }
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Малювання еліпса</h2>
+    <form>
+      Велика піввісь (a): <input type="number" id="a" value="100"><br>
+      Мала піввісь (b): <input type="number" id="b" value="50"><br>
+      <button type="button" onclick="drawEllipse()">Намалювати</button>
+    </form>
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <script>
+      function drawEllipse() {
+        var a = parseInt(document.getElementById("a").value);
+        var b = parseInt(document.getElementById("b").value);
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.ellipse(200, 150, a, b, 0, 0, 2 * Math.PI);
+        ctx.stroke();
+      }
+    </script>
+  </div>
+</body>
+
+</html>

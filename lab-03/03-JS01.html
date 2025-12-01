@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практична робота 03-JS01</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .output {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Практична робота 3: Синтаксис JavaScript. Виведення даних в JavaScript</h1>
+
+  <div class="section">
+    <h2>1. Синтаксис JavaScript</h2>
+    <h3>1.1 JavaScript програми</h3>
+    <p>Інструкції відокремлюються крапкою з комою.</p>
+    <script>
+      var x = 5;
+      var y = 10;
+      console.log("x + y =", x + y);
+    </script>
+
+    <h3>1.2 JavaScript значення (літерали)</h3>
+    <script>
+      // Числа
+      var num = 42;
+      // Рядки
+      var str = "Hello";
+      // Булеві
+      var bool = true;
+      // Масиви
+      var arr = [1, 2, 3];
+      // Об'єкти
+      var obj = { name: "John", age: 30 };
+      // null
+      var nul = null;
+      // undefined
+      var und;
+      console.log("Літерали:", num, str, bool, arr, obj, nul, und);
+    </script>
+
+    <h3>1.3 JavaScript змінні</h3>
+    <script>
+      // var - глобальна або локальна в функції
+      var a = "var variable";
+      // let - локальна в блоці
+      let b = "let variable";
+      // const - константа
+      const c = "const variable";
+      console.log(a, b, c);
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>2. Виведення інформації засобами JavaScript</h2>
+    <h3>innerHTML</h3>
+    <div id="innerDemo">Оригінальний текст</div>
+    <script>
+      var sum = 0.1 + 0.2;
+      var result = document.getElementById("innerDemo");
+      result.innerHTML = "В JavaScript 0.1 + 0.2 = " + sum;
+      result.style.color = '#2d264a';
+    </script>
+
+    <h3>document.write()</h3>
+    <p>Це буде переписано:</p>
+    <script>
+      document.write("<p>document.write(9 + 10) = " + (9 + 10) + "</p>");
+    </script>
+
+    <h3>window.alert()</h3>
+    <button onclick="showAlert()">Показати alert</button>
+    <script>
+      function showAlert() {
+        window.alert("Важлива інформація!");
+      }
+    </script>
+
+    <h3>console.log()</h3>
+    <p>Перевірте консоль браузера (F12)</p>
+    <script>
+      console.log(20 + 17);
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>4. Аналіз коду з textContent та innerHTML</h2>
+    <p id="textDemo">Це текст для демонстрації textContent vs innerHTML</p>
+    <button onclick="useTextContent()">Використати textContent</button>
+    <button onclick="useInnerHTML()">Використати innerHTML</button>
+    <script>
+      function useTextContent() {
+        document.getElementById("textDemo").textContent = "<b>Жирний текст</b>";
+      }
+      function useInnerHTML() {
+        document.getElementById("textDemo").innerHTML = "<b>Жирний текст</b>";
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>5.1 Видалення останнього символу</h2>
+    <p id="sentence">Це речення для видалення останнього символу.</p>
+    <button onclick="deleteLastChar()">Видалити останній символ</button>
+    <script>
+      function deleteLastChar() {
+        var p = document.getElementById("sentence");
+        var text = p.textContent;
+        if (text.length > 0) {
+          p.textContent = text.slice(0, -1);
+        }
+      }
+    </script>
+  </div>
+
+  <div class="section">
+    <h2>5.2 Індивідуальні функції</h2>
+    <div id="functionsOutput"></div>
+    <script>
+      // 5.2.1 getProperty
+      function getProperty(obj, key) {
+        return obj[key];
+      }
+
+      // 5.2.2 addProperty
+      function addProperty(obj, key, value) {
+        obj[key] = value;
+        return true;
+      }
+
+      // 5.2.3 removeProperty
+      function removeProperty(obj, key) {
+        delete obj[key];
+        return obj;
+      }
+
+      // 5.2.4 getFullName
+      function getFullName(firstName, lastName) {
+        return firstName + " " + lastName;
+      }
+
+      // 5.2.5 getLengthOfWord
+      function getLengthOfWord(word) {
+        return word.length;
+      }
+
+      // 5.2.6 getLengthOfTwoWords
+      function getLengthOfTwoWords(word1, word2) {
+        return word1.length + word2.length;
+      }
+
+      // 5.2.7 isGreaterThan
+      function isGreaterThan(num1, num2) {
+        return num1 > num2;
+      }
+
+      // 5.2.8 isEven
+      function isEven(num) {
+        return num % 2 === 0;
+      }
+
+      // 5.2.9 isEvenAndGreaterThanTen
+      function isEvenAndGreaterThanTen(num) {
+        return num % 2 === 0 && num > 10;
+      }
+
+      // 5.2.10 computeAreaOfATriangle
+      function computeAreaOfATriangle(base, height) {
+        return (base * height) / 2;
+      }
+
+      // Демонстрація
+      var output = document.getElementById("functionsOutput");
+      var testObj = { name: "Test" };
+      output.innerHTML += "<p>getProperty: " + getProperty(testObj, "name") + "</p>";
+      output.innerHTML += "<p>addProperty: " + addProperty(testObj, "age", 25) + "</p>";
+      output.innerHTML += "<p>getFullName: " + getFullName("John", "Doe") + "</p>";
+      output.innerHTML += "<p>getLengthOfWord: " + getLengthOfWord("hello") + "</p>";
+      output.innerHTML += "<p>isEven: " + isEven(4) + "</p>";
+      output.innerHTML += "<p>computeAreaOfATriangle: " + computeAreaOfATriangle(10, 5) + "</p>";
+    </script>
+  </div>
+</body>
+
+</html>
