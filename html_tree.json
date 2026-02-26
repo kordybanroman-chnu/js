@@ -1,82 +1,148 @@
 {
-    "lab-01": {
-        "01-JS01.html": null,
-        "01-JS02.html": null
-    },
-    "lab-02": {
-        "images": {
-            "firefox-icon.png": null,
-            "firefox-icon_bw.png": null
+    "01-Lab": {
+        "0-Task": {
+            "01.pdf": null
         },
-        "scripts": {
-            "alert.js": null,
-            "confirm.js": null,
-            "prompt.js": null
+        "1-Source": {
+            "01-JS01.html": null,
+            "01-JS02.html": null
         },
-        "styles": {
-            "style.css": null
+        "2-Report": {
+            "Kordyban-lab-1.pdf": null,
+            "lab-1.odt": null
+        }
+    },
+    "02-Lab": {
+        "0-Task": {
+            "02.pdf": null
         },
-        "02-JS01.html": null,
-        "light-bulb.html": null,
-        "output-demo.html": null,
-        "traffic-light.html": null
+        "1-Source": {
+            "images": {
+                "firefox-icon.png": null,
+                "firefox-icon_bw.png": null
+            },
+            "scripts": {
+                "alert.js": null,
+                "confirm.js": null,
+                "prompt.js": null
+            },
+            "styles": {
+                "style.css": null
+            },
+            "02-JS01.html": null,
+            "light-bulb.html": null,
+            "output-demo.html": null,
+            "traffic-light.html": null
+        },
+        "2-Report": {
+            "Kordyban-lab-2.pdf": null,
+            "lab-2.odt": null
+        }
     },
-    "lab-03": {
-        "03-JS01.html": null
+    "03-Lab": {
+        "0-Task": {
+            "03.pdf": null
+        },
+        "1-Source": {
+            "03-JS01.html": null
+        }
     },
-    "lab-04": {
-        "04-JS01.html": null
+    "04-Lab": {
+        "0-Task": {
+            "04.pdf": null
+        },
+        "1-Source": {
+            "04-JS01.html": null
+        }
     },
-    "lab-05": {
-        "05-JS01.html": null
+    "05-Lab": {
+        "0-Task": {
+            "05.pdf": null
+        },
+        "1-Source": {
+            "05-JS01.html": null
+        }
     },
-    "lab-06": {
-        "06-JS01.html": null
+    "06-Lab": {
+        "0-Task": {
+            "06.pdf": null
+        },
+        "1-Source": {
+            "06-JS01.html": null
+        }
     },
-    "lab-07": {
-        "07-JS01.html": null
+    "07-Lab": {
+        "0-Task": {
+            "07.pdf": null
+        },
+        "1-Source": {
+            "07-JS01.html": null
+        }
     },
-    "lab-08": {
-        "08-JS01.html": null
+    "08-Lab": {
+        "0-Task": {
+            "08.pdf": null
+        },
+        "1-Source": {
+            "08-JS01.html": null
+        }
     },
-    "lab-09": {
-        "09-JS01.html": null,
-        "09-JS02.html": null
+    "09-Lab": {
+        "0-Task": {
+            "09.pdf": null
+        },
+        "1-Source": {
+            "09-JS01.html": null,
+            "09-JS02.html": null
+        }
     },
-    "lab-10": {
-        "10-JS01.html": null
+    "10-Lab": {
+        "0-Task": {
+            "10.pdf": null
+        },
+        "1-Source": {
+            "10-JS01.html": null
+        }
     },
-    "lab-11": {
-        "11-JS01.html": null
+    "11-Lab": {
+        "0-Task": {
+            "11.pdf": null
+        },
+        "1-Source": {
+            "11-JS01.html": null
+        }
     },
-    "lab-12": {
-        "12-JS01.html": null
+    "12-Lab": {
+        "0-Task": {
+            "12.pdf": null
+        },
+        "1-Source": {
+            "12-JS01.html": null
+        }
     },
-    "lab-13": {
-        "13-JS01.html": null
+    "13-Lab": {
+        "0-Task": {
+            "13.pdf": null
+        },
+        "1-Source": {
+            "13-JS01.html": null
+        }
     },
-    "lab-14": {
-        "14-JS01.html": null
+    "14-Lab": {
+        "0-Task": {
+            "14.pdf": null
+        },
+        "1-Source": {
+            "14-JS01.html": null
+        }
     },
-    "lab-15": {
-        "15-JS01.html": null
-    },
-    "labs": {
-        "01.pdf": null,
-        "02.pdf": null,
-        "03.pdf": null,
-        "04.pdf": null,
-        "05.pdf": null,
-        "06.pdf": null,
-        "07.pdf": null,
-        "08.pdf": null,
-        "09.pdf": null,
-        "10.pdf": null,
-        "11.pdf": null,
-        "12.pdf": null,
-        "13.pdf": null,
-        "14.pdf": null,
-        "15.pdf": null
+    "15-Lab": {
+        "0-Task": {
+            "15.pdf": null
+        },
+        "1-Source": {
+            "15-JS01.html": null
+        }
     },
     "generate_json.py": null,
     "html_tree.json": null,
